@@ -70,7 +70,7 @@
       color: #c8d4f0;
     }
     p, li { font-size: 15px; color: #b0bcd8; margin-bottom: 10px; }
-    ul { padding-left: 20px; margin-bottom: 10px; }
+    ul, ol { padding-left: 20px; margin-bottom: 10px; }
     a { color: #e8619a; }
     .badge {
       display: inline-block;
@@ -84,30 +84,53 @@
     }
     .page { display: none; }
     .page.active { display: block; }
+    .delete-box {
+      background: #1a2340;
+      border: 1px solid #1e2d4a;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    .delete-box h3 { margin-top: 0; }
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .step-num {
+      background: #e8619a;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
-
 <header>
   <div>
     <img src="fmp_logotxt.png" height="32" alt="FindMyPeanut" style="height:32px;">
   </div>
 </header>
-
 <nav>
-  <a href="#" class="active" onclick="show('privacy', this)">Privacy Policy</a>
-  <a href="#" onclick="show('terms', this)">Terms of Service</a>
+  <a href="#" class="active" onclick="return show('privacy', this)">Privacy Policy</a>
+  <a href="#" onclick="return show('terms', this)">Terms of Service</a>
+  <a href="#" onclick="return show('delete', this)">Delete Account</a>
 </nav>
-
 <div class="container">
 
   <!-- ── Privacy Policy ── -->
   <div id="privacy" class="page active">
     <h2>Privacy Policy</h2>
     <p class="updated">Last updated: June 2026</p>
-
     <div class="badge">📍 FindMyPeanut is a community lost &amp; found network for pets.</div>
-
     <h3>1. Information We Collect</h3>
     <p>We collect information you provide directly:</p>
     <ul>
@@ -122,7 +145,6 @@
       <li>App usage patterns to improve the service</li>
       <li>Approximate location (only when you grant permission)</li>
     </ul>
-
     <h3>2. How We Use Your Information</h3>
     <ul>
       <li>To display lost and found pet reports on the community map</li>
@@ -131,14 +153,11 @@
       <li>To verify shelter and rescue organization accounts</li>
       <li>To improve app performance and fix bugs</li>
     </ul>
-
     <h3>3. Location Data</h3>
     <p>Location is used only to show nearby reports and to attach a location to sightings you submit. We apply coordinate fuzzing (~100 meters) to all public report locations to protect the privacy of pet owners. Exact coordinates are never shown publicly.</p>
     <p>We do not track your location in the background. Location is only accessed when you actively use the app.</p>
-
     <h3>4. Anonymous Reporting</h3>
     <p>You can submit lost or found pet reports without creating an account. Anonymous reports are stored without any personally identifiable information. If you later create an account, you may claim your anonymous reports.</p>
-
     <h3>5. Information Sharing</h3>
     <p>We do not sell your personal information. We share information only in these limited circumstances:</p>
     <ul>
@@ -146,19 +165,14 @@
       <li><strong>Service providers</strong> — we use Supabase for database and authentication, and Stadia Maps for mapping. These providers process data only as necessary to provide their services.</li>
       <li><strong>Legal requirements</strong> — if required by law or to protect the safety of users</li>
     </ul>
-
     <h3>6. Data Retention</h3>
     <p>Pet reports remain active until you mark them resolved or delete them. You can delete your account and all associated data at any time from the Settings page in the app.</p>
-
     <h3>7. Children's Privacy</h3>
     <p>FindMyPeanut is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
-
     <h3>8. Security</h3>
     <p>We use industry-standard security measures including encrypted connections (HTTPS), row-level security on our database, and secure authentication. No method of transmission over the internet is 100% secure.</p>
-
     <h3>9. Your Rights</h3>
     <p>You may request access to, correction of, or deletion of your personal data at any time by contacting us or using the account deletion feature in the app.</p>
-
     <h3>10. Contact</h3>
     <p>Questions about this policy? Contact us at <a href="mailto:findmypeanut@gmail.com">findmypeanut@gmail.com</a></p>
   </div>
@@ -167,12 +181,9 @@
   <div id="terms" class="page">
     <h2>Terms of Service</h2>
     <p class="updated">Last updated: June 2026</p>
-
     <div class="badge">📋 By using FindMyPeanut, you agree to these terms.</div>
-
     <h3>1. Acceptance of Terms</h3>
     <p>By downloading or using FindMyPeanut, you agree to be bound by these Terms of Service. If you do not agree, do not use the app.</p>
-
     <h3>2. Use of the Service</h3>
     <p>FindMyPeanut is a community platform for reporting and finding lost pets. You agree to:</p>
     <ul>
@@ -182,11 +193,9 @@
       <li>Not post false, misleading, or spam reports</li>
       <li>Treat other community members with respect</li>
     </ul>
-
     <h3>3. User Content</h3>
     <p>You retain ownership of photos and descriptions you submit. By posting content, you grant FindMyPeanut a non-exclusive license to display that content to other users for the purpose of helping find lost pets.</p>
     <p>You are responsible for ensuring you have the right to share any photos you upload.</p>
-
     <h3>4. Prohibited Conduct</h3>
     <ul>
       <li>Posting false reports or deliberately misleading information</li>
@@ -195,28 +204,79 @@
       <li>Using the service to facilitate animal cruelty or theft</li>
       <li>Scraping or automated access to the service</li>
     </ul>
-
     <h3>5. Disclaimers</h3>
     <p>FindMyPeanut is provided "as is" without warranty of any kind. We do not guarantee that using our service will result in finding a lost pet. We are not responsible for the accuracy of user-submitted reports.</p>
-
     <h3>6. Limitation of Liability</h3>
     <p>To the fullest extent permitted by law, FindMyPeanut shall not be liable for any indirect, incidental, or consequential damages arising from your use of the service.</p>
-
     <h3>7. Termination</h3>
     <p>We reserve the right to suspend or terminate accounts that violate these terms. You may delete your account at any time from the Settings page.</p>
-
     <h3>8. Changes to Terms</h3>
     <p>We may update these terms from time to time. Continued use of the app after changes constitutes acceptance of the new terms.</p>
-
     <h3>9. Governing Law</h3>
     <p>These terms are governed by the laws of the Commonwealth of Massachusetts, United States.</p>
-
     <h3>10. Contact</h3>
     <p>Questions about these terms? Contact us at <a href="mailto:findmypeanut@gmail.com">findmypeanut@gmail.com</a></p>
   </div>
 
-</div>
+  <!-- ── Delete Account ── -->
+  <div id="delete" class="page">
+    <h2>Delete Your Account</h2>
+    <p class="updated">Last updated: June 2026</p>
+    <div class="badge">🗑️ You can delete your FindMyPeanut account at any time.</div>
 
+    <p>We're sorry to see you go. You can delete your account and all associated data directly from the app, or by contacting us.</p>
+
+    <div class="delete-box">
+      <h3>Delete from the app</h3>
+      <div class="step">
+        <div class="step-num">1</div>
+        <p>Open the <strong>FindMyPeanut</strong> app and sign in</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <p>Tap the <strong>Profile</strong> icon in the top navigation bar</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <p>Tap <strong>Settings</strong></p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <p>Scroll to the bottom and tap <strong>Delete Account</strong></p>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <p>Confirm deletion — your account will be permanently removed</p>
+      </div>
+    </div>
+
+    <div class="delete-box">
+      <h3>Delete by email</h3>
+      <p>If you're unable to access the app, email us at <a href="mailto:findmypeanut@gmail.com">findmypeanut@gmail.com</a> with the subject line <strong>"Delete Account"</strong> and include the email address associated with your account. We will process your request within 30 days.</p>
+    </div>
+
+    <h3>What gets deleted</h3>
+    <ul>
+      <li>Your account and profile information</li>
+      <li>Your email address and authentication data</li>
+      <li>Your device tokens and notification preferences</li>
+      <li>Your personal contact information</li>
+    </ul>
+
+    <h3>What may be retained</h3>
+    <ul>
+      <li>Pet reports you submitted may remain visible on the map in anonymized form to continue helping the community find pets. You can delete individual reports before deleting your account.</li>
+      <li>Aggregate, non-identifiable usage data for app improvement</li>
+    </ul>
+
+    <h3>Retention period</h3>
+    <p>Account deletion is processed immediately. Any retained anonymized data is purged within 30 days.</p>
+
+    <h3>Questions?</h3>
+    <p>Contact us at <a href="mailto:findmypeanut@gmail.com">findmypeanut@gmail.com</a></p>
+  </div>
+
+</div>
 <script>
   function show(page, link) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -225,7 +285,11 @@
     link.classList.add('active');
     return false;
   }
-</script>
 
+  // Handle hash on load
+  if (window.location.hash === '#delete-account') {
+    show('delete', document.querySelectorAll('nav a')[2]);
+  }
+</script>
 </body>
 </html>
